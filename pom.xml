@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>jsf.sandbox</groupId>
+    <artifactId>jsf-sandbox2</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>JSF - PrimeFaces Jetty/Tomcat plugin Example</name>
+    <url>https://github.com/gilbertoca/jsf-sandbox2</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <servlet.version>3.1.0</servlet.version>
+        <jsf.version>2.2.13</jsf.version>
+        <primefaces.version>5.3</primefaces.version>
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <jetty-maven-plugin.version>9.2.14.v20151106</jetty-maven-plugin.version>
+        <tomcat-maven-plugin.version>2.2</tomcat-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSF -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.faces</artifactId>
+            <version>${jsf.version}</version>
+        </dependency>        
+        <!-- PrimeFaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty-maven-plugin.version}</version>
+                <configuration>
+                    <httpConnector>
+                        <port>9090</port>
+                    </httpConnector>
+                    <webApp>
+                        <contextPath>/sandbox2</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat-maven-plugin.version}</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/sandbox2</path>
+                </configuration>
+            </plugin>            
+        </plugins>
+    </build>
+</project>
