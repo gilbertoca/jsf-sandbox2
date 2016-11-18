@@ -5,8 +5,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class HelloWorld {
 
-    private String firstName = "John";
-    private String lastName = "Doe";
+    private String firstName = "JSF";
+    private String lastName = "PrimeFaces";
 
     public String getFirstName() {
         return firstName;

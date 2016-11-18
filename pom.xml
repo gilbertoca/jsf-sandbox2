@@ -14,12 +14,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <java.version>1.8</java.version>
         <servlet.version>3.1.0</servlet.version>
         <jsf.version>2.2.13</jsf.version>
         <primefaces.version>5.3</primefaces.version>
-        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-        <jetty-maven-plugin.version>9.2.14.v20151106</jetty-maven-plugin.version>
-        <tomcat-maven-plugin.version>2.2</tomcat-maven-plugin.version>
+        <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+        <maven.war.plugin.version>2.6</maven.war.plugin.version>
+        <jetty.maven.plugin.version>9.2.14.v20151106</jetty.maven.plugin.version>
+        <tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -45,36 +47,46 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+                <configuration>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
+                    <!--webXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</webXml-->
+                </configuration>
+            </plugin>            
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty-maven-plugin.version}</version>
+                <version>${jetty.maven.plugin.version}</version>
                 <configuration>
                     <httpConnector>
-                        <port>9090</port>
+                        <port>8080</port>
                     </httpConnector>
                     <webApp>
-                        <contextPath>/sandbox2</contextPath>
+                        <contextPath>/${project.build.finalName}</contextPath>
                     </webApp>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>${tomcat-maven-plugin.version}</version>
+                <version>${tomcat.maven.plugin.version}</version>
                 <configuration>
                     <port>8080</port>
-                    <path>/sandbox2</path>
+                    <path>/${project.build.finalName}</path>
                 </configuration>
             </plugin>            
         </plugins>
