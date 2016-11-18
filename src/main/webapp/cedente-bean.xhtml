@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Cedente/Beneficiário</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+
+            <p:panel header="Formulário Cedente/Beneficiário">
+                <h:panelGrid columns="2" cellpadding="4">
+                    <h:outputText value="CNPJ: " />
+                    <p:inputText value="#{cedenteBean.cedente.CPRF}" >
+                        <f:converter converterId="cnpjConverter"/>
+                    </p:inputText>
+
+                    <h:outputText value="Last Name: " />
+                    <p:inputText value="#{cedenteBean.cedente.nome}" />
+
+                    <p:commandButton value="Salvar" action="cedenteBean.salvar"/>
+                </h:panelGrid>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
