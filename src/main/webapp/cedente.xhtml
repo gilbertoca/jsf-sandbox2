@@ -19,10 +19,10 @@
                         <f:converter converterId="cnpjConverter"/>
                     </p:inputText>
 
-                    <h:outputText value="Last Name: " />
+                    <h:outputText value="Nome: " />
                     <p:inputText value="#{cedenteBean.cedente.nome}" />
 
-                    <p:commandButton value="Salvar" action="cedenteBean.salvar"/>
+                    <p:commandButton value="Salvar" action="#{cedenteBean.salvar}"/>
                 </h:panelGrid>
             </p:panel>
 
