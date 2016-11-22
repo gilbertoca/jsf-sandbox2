@@ -11,34 +11,36 @@
 
     <h:body>
         <h:form>
-
+            <p:messages />
             <p:panel header="Formulário Sacado/Pagador">
                 <h:panelGrid columns="2" cellpadding="4">
-                    <h:outputText value="CNPJ: " />
-                    <p:inputText value="#{sacadoBean.sacado.CPRF}" >
+                    <p:outputLabel for="cnpj" value="CNPJ: " />
+                    <p:inputText id="cnpj" value="#{sacadoBean.sacado.CPRF}" >
                         <f:converter converterId="cnpjConverter"/>
                     </p:inputText>
 
-                    <h:outputText value="Nome: " />
-                    <p:inputText value="#{sacadoBean.sacado.nome}" />
+                    <p:outputLabel for="nome" value="Nome: " />
+                    <p:inputText id="nome" value="#{sacadoBean.sacado.nome}" />
 
-                    <h:outputText value="Logradouro: " />
-                    <p:inputText value="#{sacadoBean.endereco.logradouro}" />
-                    
-                    <h:outputText value="Número: " />
-                    <p:inputText value="#{sacadoBean.endereco.numero}" />
-                    
-                    <h:outputText value="Bairro: " />
-                    <p:inputText value="#{sacadoBean.endereco.bairro}" />
-                    
-                    <h:outputText value="UF: " />
-                    <p:inputText value="#{UnidadeFederativa.TO}" />
-                    
-                    <h:outputText value="Localidade: " />
-                    <p:inputText value="#{sacadoBean.endereco.localidade}" />
+                    <p:outputLabel for="logradouro" value="Logradouro: " />
+                    <p:inputText id="logradouro" value="#{sacadoBean.endereco.logradouro}" />
 
-                    <h:outputText value="CEP " />
-                    <p:inputText value="#{sacadoBean.endereco.CEP}" />
+                    <p:outputLabel for="numero" value="Número: " />
+                    <p:inputText id="numero" value="#{sacadoBean.endereco.numero}" />
+
+                    <p:outputLabel for="bairro" value="Bairro: " />
+                    <p:inputText id="bairro" value="#{sacadoBean.endereco.bairro}" />
+
+                    <p:outputLabel for="uf" value="UF: " />
+                    <h:selectOneMenu id="uf" value="#{sacadoBean.endereco.UF}" >
+                        <f:selectItems value="#{sacadoBean.UFs}" var="uf"
+                                       itemValue="#{uf}" itemLabel="#{uf.nome}" />
+                    </h:selectOneMenu>
+                    <p:outputLabel for="localidade" value="Localidade: " />
+                    <p:inputText id="localidade" value="#{sacadoBean.endereco.localidade}" />
+
+                    <p:outputLabel for="cep" value="CEP: " />
+                    <p:inputText id="cep" value="#{sacadoBean.endereco.CEP.cep}" />
 
                     <p:commandButton value="Salvar" action="#{sacadoBean.salvar}"/>
                 </h:panelGrid>

@@ -3,7 +3,9 @@ package jsf.sandbox;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
+import org.jrimum.domkee.comum.pessoa.endereco.CEP;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
+import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 
 @ManagedBean
@@ -16,6 +18,9 @@ public class SacadoBean {
     @PostConstruct
     public void init() {
         sacado = new Sacado("");
+        endereco = new Endereco();
+        endereco.setCep(new CEP("00000-000"));
+        sacado.addEndereco(endereco);
     }
 
     public void salvar() {
@@ -37,5 +42,9 @@ public class SacadoBean {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public UnidadeFederativa[] getUFs() {
+        return UnidadeFederativa.values();
     }
 }
