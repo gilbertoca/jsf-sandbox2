@@ -11,22 +11,18 @@
 
     <h:body>
         <h:form>
-            <p:messages />
-            <p:panel header="Formulário Cedente/Beneficiário">
-                <h:panelGrid columns="2" cellpadding="4">
-                    <p:outputLabel for="cnpj" value="CNPJ: " />
-                    <p:inputText id="cnpj" value="#{cedenteBean.cedente.CPRF}" >
-                        <f:converter converterId="cnpjConverter"/>
-                        <f:validateLength minimum="14" maximum="14" />
-                    </p:inputText>
-
-                    <p:outputLabel for="nome" value="Nome: " />
-                    <p:inputText id="nome" value="#{cedenteBean.cedente.nome}" />
-
-                    <p:commandButton value="Salvar" action="#{cedenteBean.salvar}"/>
-                </h:panelGrid>
-            </p:panel>
-
+            <!--h:panel header="Formulário Cedente/Beneficiário"-->
+            <h:panelGrid columns="2" cellpadding="4">
+                <h:outputLabel for="cnpj" value="CNPJ: " />
+                <h:inputText id="cnpj" value="#{cedenteBean.cedente.CPRF}" required="true">
+                    <f:validateLength for="cnpj" minimum="14" maximum="14" />			
+                    <f:converter converterId="cnpjConverter"/>
+                </h:inputText>
+                <h:outputLabel for="nome" value="Nome: " />
+                <h:inputText id="nome" value="#{cedenteBean.cedente.nome}" />
+                <h:commandButton value="Salvar" action="#{cedenteBean.salvar}"/>
+            </h:panelGrid>
+            <h:messages />
         </h:form>
     </h:body>
 </html>

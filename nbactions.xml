@@ -7,8 +7,18 @@
                 <packaging>ear</packaging>
                 <packaging>ejb</packaging>
             </packagings>
-            <goals>
-                <goal>jetty:run</goal>
-            </goals>
+        </action>
+        <action>
+            <actionName>debug</actionName>
+            <packagings>
+                <packaging>war</packaging>
+                <packaging>ear</packaging>
+                <packaging>ejb</packaging>
+            </packagings>
+            <properties>
+                <jpda.listen>maven netbeans.deploy.debugmode=true</jpda.listen>
+                
+                
+            </properties>
         </action>
     </actions>
