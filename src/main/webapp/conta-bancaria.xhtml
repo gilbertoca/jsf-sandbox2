@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Conta Bancária</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:panelGrid columns="2">
+                <f:facet name="header">
+                    Formulário Conta Bancária
+                </f:facet> 
+
+                <p:outputLabel for="banco" value="Banco: " />
+                <p:selectOneMenu id="banco" value="#{contaBancariaBean.bancoSuportado}" >
+                    <f:selectItems value="#{contaBancariaBean.bancos}" var="banco"
+                                   itemValue="#{banco}" itemLabel="#{banco.instituicao}" />
+                </p:selectOneMenu>                
+                <p:outputLabel for="agencia_n" value="N. Agência: " />
+                <p:inputText id="agencia_n" value="#{contaBancariaBean.agencia.codigo}" />
+
+                <p:outputLabel for="agencia_d" value="Dígito Agência: " />
+                <p:inputText id="agencia_d" value="#{contaBancariaBean.agencia.digitoVerificador}" />
+                
+
+                <f:facet name="footer">
+                    <p:commandButton value="Salvar" action="#{contaBancariaBean.salvar}" ajax="false"/>
+                </f:facet>
+            </p:panelGrid>
+            <p:messages />
+        </h:form>
+    </h:body>
+</html>
