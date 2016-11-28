@@ -17,16 +17,31 @@
                 </f:facet>
                 
                 <p:outputLabel for="cnpj" value="CNPJ: " />
-                <p:inputText id="cnpj" value="#{cedenteBean.cedente.CPRF}" required="true">
+                <p:inputText id="cnpj" value="#{cedenteController.cedente.cnpj}" required="true">
                     <f:validateLength for="cnpj" minimum="14" maximum="14" />			
-                    <f:converter converterId="cnpjConverter"/>
                 </p:inputText>
                 
                 <p:outputLabel for="nome" value="Nome: " />
-                <p:inputText id="nome" value="#{cedenteBean.cedente.nome}" />
+                <p:inputText id="nome" value="#{cedenteController.cedente.nome}" />
+                
+                <p:outputLabel for="logradouro" value="Logradouro: " />
+                <p:inputText id="logradouro" value="#{cedenteController.logradouro}" />
+
+                <p:outputLabel for="complemento" value="Complemento: " />
+                <p:inputText id="complemento" value="#{cedenteController.sacado.complemento}" />
+
+                <p:outputLabel for="bairro" value="Bairro: " />
+                <p:inputText id="bairro" value="#{cedenteController.sacado.bairro}" />
+
+
+                <p:outputLabel for="localidade" value="Localidade: " />
+                <p:inputText id="localidade" value="#{cedenteController.sacado.cidade}" />
+
+                <p:outputLabel for="cep" value="CEP: " />
+                <p:inputText id="cep" value="#{cedenteController.sacado.cep}" />
                 
                 <f:facet name="footer">
-                    <p:commandButton value="Salvar" action="#{cedenteBean.salvar}" ajax="false" />
+                    <p:commandButton value="Salvar" action="#{cedenteController.salvar}" ajax="false" />
                 </f:facet>                
             </p:panelGrid>
             <p:messages />

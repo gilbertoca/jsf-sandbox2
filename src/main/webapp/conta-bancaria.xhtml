@@ -17,19 +17,51 @@
                 </f:facet> 
 
                 <p:outputLabel for="banco" value="Banco: " />
-                <p:selectOneMenu id="banco" value="#{contaBancariaBean.bancoSuportado}" >
-                    <f:selectItems value="#{contaBancariaBean.bancos}" var="banco"
+                <p:selectOneMenu id="banco" value="#{contaBancariaController.bancoSuportado}" >
+                    <f:selectItems value="#{contaBancariaController.bancos}" var="banco"
                                    itemValue="#{banco}" itemLabel="#{banco.instituicao}" />
                 </p:selectOneMenu>                
-                <p:outputLabel for="agencia_n" value="N. Agência: " />
-                <p:inputText id="agencia_n" value="#{contaBancariaBean.agencia.codigo}" />
+                <p:outputLabel for="n_conta" value="Número: " />
+                <p:inputText id="n_conta" value="#{contaBancariaController.conta.conta}" />
 
-                <p:outputLabel for="agencia_d" value="Dígito Agência: " />
-                <p:inputText id="agencia_d" value="#{contaBancariaBean.agencia.digitoVerificador}" />
+                <p:outputLabel for="d_conta" value="Dígito: " />
+                <p:inputText id="d_conta" value="#{contaBancariaController.conta.contaDigito}" />
                 
+                <p:outputLabel for="n_agencia" value="Agência: " />
+                <p:inputText id="n_agencia" value="#{contaBancariaController.conta.agencia}" />
 
+                <p:outputLabel for="d_agencia" value="Dígito: " />
+                <p:inputText id="d_agencia" value="#{contaBancariaController.conta.agenciaDigito}" />
+                
+                <p:outputLabel for="carteira" value="Carteira: " />
+                <p:inputText id="carteira" value="#{contaBancariaController.conta.carteira}" />
+
+                <p:outputLabel for="modalidade" value="Modalidade: " />
+                <p:inputText id="modalidade" value="#{contaBancariaController.conta.modalidade}" />
+                
+                <p:outputLabel for="local_pagamento" value="Local pagamento: " />
+                <p:inputText id="local_pagamento" value="#{contaBancariaController.conta.localPagamento}" />
+                
+                <p:outputLabel for="instrucao1" value="Instrução 1: " />
+                <p:inputText id="instrucao1" value="#{contaBancariaController.conta.instrucao1}" />
+                
+                <p:outputLabel for="instrucao2" value="Instrução 2: " />
+                <p:inputText id="instrucao2" value="#{contaBancariaController.conta.instrucao2}" />
+                
+                <p:outputLabel for="instrucao3" value="Instrução 3: " />
+                <p:inputText id="instrucao3" value="#{contaBancariaController.conta.instrucao3}" />
+                
+                <p:outputLabel for="instrucao4" value="Instrução 4: " />
+                <p:inputText id="instrucao4" value="#{contaBancariaController.conta.instrucao4}" />
+                
+                <p:outputLabel for="instrucao5" value="Instrução 5: " />
+                <p:inputText id="instrucao5" value="#{contaBancariaController.conta.instrucao5}" />
+                
+                <p:outputLabel for="instrucao6" value="Instrução 6: " />
+                <p:inputText id="instrucao6" value="#{contaBancariaController.conta.instrucao6}" />
+                
                 <f:facet name="footer">
-                    <p:commandButton value="Salvar" action="#{contaBancariaBean.salvar}" ajax="false"/>
+                    <p:commandButton value="Salvar" action="#{contaBancariaController.salvar}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
             <p:messages />

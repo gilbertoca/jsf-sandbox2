@@ -17,40 +17,31 @@
                 </f:facet> 
 
                 <p:outputLabel for="cpf" value="CPF: " />
-                <p:inputText id="cpf" value="#{sacadoBean.sacado.CPRF}" required="true">
-                    <f:validateLength for="cpf" minimum="14" maximum="14" />			
-                    <f:converter converterId="cpfConverter"/>
+                <p:inputText id="cpf" value="#{sacadoController.sacado.cpf}" required="true">
+                    <f:validateLength for="cpf" minimum="11" maximum="11" />			
                 </p:inputText>
 
                 <p:outputLabel for="nome" value="Nome: " />
-                <p:inputText id="nome" value="#{sacadoBean.sacado.nome}" />
+                <p:inputText id="nome" value="#{sacadoController.sacado.nome}" />
 
                 <p:outputLabel for="logradouro" value="Logradouro: " />
-                <p:inputText id="logradouro" value="#{sacadoBean.endereco.logradouro}" />
+                <p:inputText id="logradouro" value="#{sacadoController.sacado.logradouro}" />
 
                 <p:outputLabel for="complemento" value="Complemento: " />
-                <p:inputText id="complemento" value="#{sacadoBean.endereco.complemento}" />
-
-                <p:outputLabel for="numero" value="Número: " />
-                <p:inputText id="numero" value="#{sacadoBean.endereco.numero}" />
+                <p:inputText id="complemento" value="#{sacadoController.sacado.complemento}" />
 
                 <p:outputLabel for="bairro" value="Bairro: " />
-                <p:inputText id="bairro" value="#{sacadoBean.endereco.bairro}" />
+                <p:inputText id="bairro" value="#{sacadoController.sacado.bairro}" />
 
-                <p:outputLabel for="uf" value="UF: " />
-                <p:selectOneMenu id="uf" value="#{sacadoBean.endereco.UF}" >
-                    <f:selectItems value="#{sacadoBean.UFs}" var="uf"
-                                   itemValue="#{uf}" itemLabel="#{uf.nome}" />
-                </p:selectOneMenu>
 
                 <p:outputLabel for="localidade" value="Localidade: " />
-                <p:inputText id="localidade" value="#{sacadoBean.endereco.localidade}" />
+                <p:inputText id="localidade" value="#{sacadoController.sacado.cidade}" />
 
                 <p:outputLabel for="cep" value="CEP: " />
-                <p:inputText id="cep" value="#{sacadoBean.endereco.CEP.cep}" />
+                <p:inputText id="cep" value="#{sacadoController.sacado.cep}" />
 
                 <f:facet name="footer">
-                    <p:commandButton value="Salvar" action="#{sacadoBean.salvar}" ajax="false"/>
+                    <p:commandButton value="Salvar" action="#{sacadoController.salvar}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
             <p:messages />

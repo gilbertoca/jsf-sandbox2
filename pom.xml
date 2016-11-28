@@ -20,7 +20,7 @@
         <primefaces.version>5.3</primefaces.version>
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <maven.war.plugin.version>2.6</maven.war.plugin.version>
-        <jetty.maven.plugin.version>9.2.14.v20151106</jetty.maven.plugin.version>
+        <jetty.maven.plugin.version>jetty-9.4.0.RC2</jetty.maven.plugin.version>
         <tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
     </properties>
 
@@ -88,14 +88,14 @@
                 </configuration>
             </plugin-->            
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.maven.plugin.version}</version>
+   		 <groupId>org.eclipse.jetty</groupId>
+    		 <artifactId>jetty-maven-plugin</artifactId>
+    		 <version>9.4.0.RC2</version>
                 <configuration>
-                    <reload>manual</reload>
+                    <!--reload>manual</reload>
                     <httpConnector>
                         <port>8080</port>
-                    </httpConnector>
+                    </httpConnector-->
                     <webApp>
                         <contextPath>/${project.build.finalName}</contextPath>
                     </webApp>

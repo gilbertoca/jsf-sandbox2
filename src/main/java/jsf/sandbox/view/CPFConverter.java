@@ -1,4 +1,4 @@
-package jsf.sandbox;
+package jsf.sandbox.view;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -7,10 +7,10 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 import org.jrimum.domkee.comum.pessoa.id.cprf.AbstractCPRF;
-import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import org.jrimum.domkee.comum.pessoa.id.cprf.CPF;
 
-@FacesConverter(value = "cnpjConverter")
-public class CNPJConverter implements Converter {
+@FacesConverter(value = "cpfConverter")
+public class CPFConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
@@ -21,7 +21,7 @@ public class CNPJConverter implements Converter {
         try {
             return AbstractCPRF.create(submittedValue);
         } catch (IllegalArgumentException e) {
-            throw new ConverterException(new FacesMessage(submittedValue + " não é um CNPJ válido"), e);
+            throw new ConverterException(new FacesMessage(submittedValue + " não é um CPF válido"), e);
         }
     }
 
@@ -31,10 +31,10 @@ public class CNPJConverter implements Converter {
             return "";
         }
 
-        if (modelValue instanceof CNPJ) {
-            return String.valueOf(((CNPJ) modelValue).toString());
+        if (modelValue instanceof CPF) {
+            return String.valueOf(((CPF) modelValue).toString());
         } else {
-            throw new ConverterException(new FacesMessage(modelValue + " não é um CNPJ válido"));
+            throw new ConverterException(new FacesMessage(modelValue + " não é um CPF válido"));
         }
     }
 }

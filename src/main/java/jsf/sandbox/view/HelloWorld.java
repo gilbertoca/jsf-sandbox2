@@ -1,4 +1,4 @@
-package jsf.sandbox;
+package jsf.sandbox.view;
 
 import javax.faces.bean.ManagedBean;
 
