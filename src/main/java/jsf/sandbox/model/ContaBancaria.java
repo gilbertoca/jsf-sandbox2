@@ -155,5 +155,27 @@ public class ContaBancaria {
     public void setTitulos(Collection<Titulo> titulos) {
         this.titulos = titulos;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ContaBancaria [");
+        builder.append("NumeroDoBancoBacen=").append(NumeroDoBancoBacen);
+        builder.append(", agencia=").append(agencia);
+        builder.append(", agenciaDigito=").append(agenciaDigito);
+        builder.append(", carteira=").append(carteira);
+        builder.append(", conta=").append(conta);
+        builder.append(", contaDigito=").append(contaDigito);
+        builder.append(", instrucao1=").append(instrucao1);
+        builder.append(", instrucao2=").append(instrucao2);
+        builder.append(", instrucao3=").append(instrucao3);
+        builder.append(", instrucao4=").append(instrucao4);
+        builder.append(", instrucao5=").append(instrucao5);
+        builder.append(", instrucao6=").append(instrucao6);
+        builder.append(", localPagamento=").append(localPagamento);
+        builder.append(", modalidade=").append(modalidade);
+        builder.append("]");
+        return builder.toString();
+    }
         
 }

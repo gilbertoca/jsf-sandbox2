@@ -14,8 +14,7 @@ public class CedenteController {
     private Cedente cedente = new Cedente();
 
     public void salvar() {
-        System.out.println("cpf: " + cedente.getCnpj());
-        System.out.println("nome: " + cedente.getNome());
+        System.out.println(cedente);
         gerente.getCedentes().add(cedente);
     }
 

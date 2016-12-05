@@ -68,5 +68,20 @@ public class Cedente {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Cedente [");
+        builder.append("bairro=").append(bairro);
+        builder.append(", cep=").append(cep);
+        builder.append(", cidade=").append(cidade);
+        builder.append(", cnpj=").append(cnpj);
+        builder.append(", complemento=").append(complemento);
+        builder.append(", logradouro=").append(logradouro);
+        builder.append(", nome=").append(nome);
+        builder.append("]");
+        return builder.toString();
+    }
     
 }

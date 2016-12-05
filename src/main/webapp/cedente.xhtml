@@ -25,20 +25,20 @@
                 <p:inputText id="nome" value="#{cedenteController.cedente.nome}" />
                 
                 <p:outputLabel for="logradouro" value="Logradouro: " />
-                <p:inputText id="logradouro" value="#{cedenteController.logradouro}" />
+                <p:inputText id="logradouro" value="#{cedenteController.cedente.logradouro}" />
 
                 <p:outputLabel for="complemento" value="Complemento: " />
-                <p:inputText id="complemento" value="#{cedenteController.sacado.complemento}" />
+                <p:inputText id="complemento" value="#{cedenteController.cedente.complemento}" />
 
                 <p:outputLabel for="bairro" value="Bairro: " />
-                <p:inputText id="bairro" value="#{cedenteController.sacado.bairro}" />
+                <p:inputText id="bairro" value="#{cedenteController.cedente.bairro}" />
 
 
                 <p:outputLabel for="localidade" value="Localidade: " />
-                <p:inputText id="localidade" value="#{cedenteController.sacado.cidade}" />
+                <p:inputText id="localidade" value="#{cedenteController.cedente.cidade}" />
 
                 <p:outputLabel for="cep" value="CEP: " />
-                <p:inputText id="cep" value="#{cedenteController.sacado.cep}" />
+                <p:inputText id="cep" value="#{cedenteController.cedente.cep}" />
                 
                 <f:facet name="footer">
                     <p:commandButton value="Salvar" action="#{cedenteController.salvar}" ajax="false" />

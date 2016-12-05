@@ -13,8 +13,7 @@ public class SacadoController {
     private Sacado sacado = new Sacado();
 
     public void salvar() {
-        System.out.println("cpf: " + sacado.getCpf());
-        System.out.println("nome: " + sacado.getNome());
+        System.out.println(sacado);
         gerente.getSacados().add(sacado);
     }
 

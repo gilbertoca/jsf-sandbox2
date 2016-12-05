@@ -18,7 +18,7 @@ public class ContaBancariaController {
     private BancosSuportados bancoSuportado;
 
     public void salvar() {
-        System.out.println("Número da conta: " + conta.getConta());
+        System.out.println(conta);
         gerente.getContas().add(conta);
     }
 

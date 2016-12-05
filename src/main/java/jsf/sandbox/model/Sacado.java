@@ -68,5 +68,20 @@ public class Sacado {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Sacado[");
+        builder.append("bairro=").append(bairro);
+        builder.append(", cep=").append(cep);
+        builder.append(", cidade=").append(cidade);
+        builder.append(", complemento=").append(complemento);
+        builder.append(", cpf=").append(cpf);
+        builder.append(", logradouro=").append(logradouro);
+        builder.append(", nome=").append(nome);
+        builder.append("]");
+        return builder.toString();
+    }
     
 }
