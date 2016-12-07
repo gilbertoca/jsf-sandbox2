@@ -18,7 +18,9 @@ public class ContaBancariaController {
     private BancosSuportados bancoSuportado;
 
     public void salvar() {
-        System.out.println(conta);
+        conta.setNumeroDoBancoBacen(bancoSuportado.getCodigoDeCompensacao());
+        conta.setTitular(cedente);
+        System.out.println(conta + " Banco Suportado: " + bancoSuportado);
         gerente.getContas().add(conta);
     }
 

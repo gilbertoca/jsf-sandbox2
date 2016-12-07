@@ -24,7 +24,7 @@ public class ContaBancaria {
 	private String instrucao5;    
 	private String instrucao6;    
 
-	private Collection<Cedente> titulares;
+	private Cedente titular;
 	
 	private Collection<Titulo> titulos;
 
@@ -140,12 +140,12 @@ public class ContaBancaria {
         this.instrucao6 = instrucao6;
     }
 
-    public Collection<Cedente> getTitulares() {
-        return titulares;
+    public Cedente getTitular() {
+        return titular;
     }
 
-    public void setTitulares(Collection<Cedente> titulares) {
-        this.titulares = titulares;
+    public void setTitular(Cedente titular) {
+        this.titular = titular;
     }
 
     public Collection<Titulo> getTitulos() {

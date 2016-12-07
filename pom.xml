@@ -90,13 +90,11 @@
             <plugin>
    		 <groupId>org.eclipse.jetty</groupId>
     		 <artifactId>jetty-maven-plugin</artifactId>
-    		 <version>9.4.0.RC2</version>
+    		 <version>9.4.0.RC3</version>
                 <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>                    
-                    <!--reload>manual</reload>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector-->
+                    <!-- A number greater than 0 enables it. 
+                    <scanIntervalSeconds>6</scanIntervalSeconds-->                    
+                    <reload>manual</reload>
                     <webApp>
                         <contextPath>/${project.build.finalName}</contextPath>
                     </webApp>
