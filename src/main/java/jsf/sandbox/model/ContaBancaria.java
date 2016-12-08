@@ -1,7 +1,7 @@
 package jsf.sandbox.model;
 
 import java.util.Collection;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import java.util.Objects;
 
 /**
  *
@@ -26,7 +26,7 @@ public class ContaBancaria {
 
 	private Cedente titular;
 	
-	private Collection<Titulo> titulos;
+	private Collection<TituloCobranca> titulos;
 
     public String getNumeroDoBancoBacen() {
         return NumeroDoBancoBacen;
@@ -148,13 +148,52 @@ public class ContaBancaria {
         this.titular = titular;
     }
 
-    public Collection<Titulo> getTitulos() {
+    public Collection<TituloCobranca> getTitulos() {
         return titulos;
     }
 
-    public void setTitulos(Collection<Titulo> titulos) {
+    public void setTitulos(Collection<TituloCobranca> titulos) {
         this.titulos = titulos;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.agencia);
+        hash = 67 * hash + Objects.hashCode(this.agenciaDigito);
+        hash = 67 * hash + Objects.hashCode(this.conta);
+        hash = 67 * hash + Objects.hashCode(this.contaDigito);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ContaBancaria other = (ContaBancaria) obj;
+        if (!Objects.equals(this.agencia, other.agencia)) {
+            return false;
+        }
+        if (!Objects.equals(this.agenciaDigito, other.agenciaDigito)) {
+            return false;
+        }
+        if (!Objects.equals(this.conta, other.conta)) {
+            return false;
+        }
+        if (!Objects.equals(this.contaDigito, other.contaDigito)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import jsf.sandbox.model.Cedente;
 import jsf.sandbox.model.ContaBancaria;
 import jsf.sandbox.model.Sacado;
+import jsf.sandbox.model.TituloCobranca;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Manager implements Serializable{
     private List<Cedente> cedentes = new ArrayList<>();
     private List<Sacado> sacados = new ArrayList<>();
     private List<ContaBancaria> contas = new ArrayList<>();
+    private List<TituloCobranca> titulos = new ArrayList<>();
 
     public List<Cedente> getCedentes() {
         return cedentes;
@@ -43,4 +45,13 @@ public class Manager implements Serializable{
     public void setContas(List<ContaBancaria> contas) {
         this.contas = contas;
     }
+
+    public List<TituloCobranca> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(List<TituloCobranca> titulos) {
+        this.titulos = titulos;
+    }
+    
 }

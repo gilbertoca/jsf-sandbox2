@@ -1,5 +1,7 @@
 package jsf.sandbox.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author gilberto.andrade
@@ -69,6 +71,32 @@ public class Cedente {
         this.cep = cep;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.cnpj);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cedente other = (Cedente) obj;
+        if (!Objects.equals(this.cnpj, other.cnpj)) {
+            return false;
+        }
+        return true;
+    }
+
+    
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
