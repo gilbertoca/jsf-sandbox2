@@ -2,6 +2,7 @@ package jsf.sandbox.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -16,8 +17,8 @@ public class TituloCobranca {
     private boolean aceite = false;
     private String documento;
     private String nossoNumero;
-    private LocalDate dtEmissao;
-    private LocalDate dtVencimento;
+    private Date dtEmissao;
+    private Date dtVencimento;
     private BigDecimal valor;
     private BigDecimal juros;
     private BigDecimal multa;
@@ -79,19 +80,19 @@ public class TituloCobranca {
         this.nossoNumero = nossoNumero;
     }
 
-    public LocalDate getDtEmissao() {
+    public Date getDtEmissao() {
         return dtEmissao;
     }
 
-    public void setDtEmissao(LocalDate dtEmissao) {
+    public void setDtEmissao(Date dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public LocalDate getDtVencimento() {
+    public Date getDtVencimento() {
         return dtVencimento;
     }
 
-    public void setDtVencimento(LocalDate dtVencimento) {
+    public void setDtVencimento(Date dtVencimento) {
         this.dtVencimento = dtVencimento;
     }
 

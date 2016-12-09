@@ -29,12 +29,14 @@
             </p:toolbar>
             <p:panelGrid columns="2" style="width: 100%; margin-top: 20px" columnClasses="rotulo">
                 <p:outputLabel for="cedente" value="Cedente: " />
-                <p:selectOneMenu id="cedente" value="#{contaBancariaController.cedente}" >
+                <p:selectOneMenu id="cedente" value="#{contaBancariaController.cedente}" 
+                                 converter="omnifaces.SelectItemsConverter">
                     <f:selectItems value="#{contaBancariaController.gerente.cedentes}" var="cedente"
                                    itemValue="#{cedente}" itemLabel="#{cedente.nome}" />
                 </p:selectOneMenu>                
                 <p:outputLabel for="banco" value="Banco: " />
-                <p:selectOneMenu id="banco" value="#{contaBancariaController.bancoSuportado}" >
+                <p:selectOneMenu id="banco" value="#{contaBancariaController.bancoSuportado}" 
+                                 converter="omnifaces.SelectItemsConverter">
                     <f:selectItems value="#{contaBancariaController.bancos}" var="banco"
                                    itemValue="#{banco}" itemLabel="#{banco.instituicao}" />
                 </p:selectOneMenu>                
@@ -52,6 +54,9 @@
 
                 <p:outputLabel for="carteira" value="Carteira: " />
                 <p:inputText id="carteira" value="#{contaBancariaController.conta.carteira}" />
+
+                <p:outputLabel for="convenio" value="Convênio: " />
+                <p:inputText id="convenio" value="#{contaBancariaController.conta.numeroConvenio}" />
 
                 <p:outputLabel for="modalidade" value="Modalidade: " />
                 <p:inputText id="modalidade" value="#{contaBancariaController.conta.modalidade}" />

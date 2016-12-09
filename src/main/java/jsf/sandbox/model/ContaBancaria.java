@@ -13,6 +13,7 @@ public class ContaBancaria {
 	private String agenciaDigito;
 	private String conta;
 	private String contaDigito;
+        private String numeroConvenio;
 	private String carteira;
 	private String modalidade;   
         //mensagens
@@ -66,6 +67,14 @@ public class ContaBancaria {
 
     public void setContaDigito(String contaDigito) {
         this.contaDigito = contaDigito;
+    }
+
+    public String getNumeroConvenio() {
+        return numeroConvenio;
+    }
+
+    public void setNumeroConvenio(String numeroConvenio) {
+        this.numeroConvenio = numeroConvenio;
     }
 
     public String getCarteira() {
@@ -205,6 +214,7 @@ public class ContaBancaria {
         builder.append(", carteira=").append(carteira);
         builder.append(", conta=").append(conta);
         builder.append(", contaDigito=").append(contaDigito);
+        builder.append(", numeroConvenio=").append(numeroConvenio);
         builder.append(", instrucao1=").append(instrucao1);
         builder.append(", instrucao2=").append(instrucao2);
         builder.append(", instrucao3=").append(instrucao3);
