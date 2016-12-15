@@ -46,7 +46,7 @@ public class EmissorBoletoBancoBrasil implements Serializable {
          * Não sei por que raios se usa o n. do convênio ao invez da conta corrente
          */
         contaBancaria.setNumeroDaConta(new NumeroDaConta(Integer.valueOf(tituloCobranca.getConta().getNumeroConvenio())));
-        String contaDigitoDoCedenteParaExibicao = tituloCobranca.getConta().getConta()+"-"+tituloCobranca.getConta().getAgenciaDigito();
+        String contaDigitoDoCedenteParaExibicao = tituloCobranca.getConta().getConta() + "-" + tituloCobranca.getConta().getAgenciaDigito();
         /*
          * Carteira com no máximo 2 dígitos
          * contaBancaria.setModalidade(new Modalidade(01,"SIMPLES COM REGISTRO"));
@@ -106,6 +106,8 @@ public class EmissorBoletoBancoBrasil implements Serializable {
                 contaDigitoDoCedenteParaExibicao);
         boleto.addTextosExtras("txtFcAgenciaCodigoCedente", agenciaCodigoDoCedenteParaExibicao);
         boleto.addTextosExtras("txtRsAgenciaCodigoCedente", agenciaCodigoDoCedenteParaExibicao);
+        boleto.addTextosExtras("txtRsEspecie", "R$");
+        boleto.addTextosExtras("txtFcEspecie", "R$");
         boleto.setLocalPagamento(tituloCobranca.getConta().getLocalPagamento());
         boleto.setInstrucao1(tituloCobranca.getConta().getInstrucao1());
         boleto.setInstrucao2(tituloCobranca.getConta().getInstrucao2());
