@@ -15,8 +15,14 @@
                 <packaging>ear</packaging>
                 <packaging>ejb</packaging>
             </packagings>
+            <goals>
+                <goal>jetty:run-war</goal>
+                
+            </goals>
             <properties>
-                <jpda.listen>maven netbeans.deploy.debugmode=true</jpda.listen>
+                <jpda.listen>maven</jpda.listen>
+                <netbeans.deploy.debugmode>true</netbeans.deploy.debugmode>
+                <skipTests>true</skipTests>
                 
                 
             </properties>

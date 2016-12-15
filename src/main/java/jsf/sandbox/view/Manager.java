@@ -3,8 +3,8 @@ package jsf.sandbox.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import jsf.sandbox.model.Cedente;
 import jsf.sandbox.model.ContaBancaria;
 import jsf.sandbox.model.Sacado;
@@ -14,9 +14,9 @@ import jsf.sandbox.model.TituloCobranca;
  *
  * @author gilberto.andrade
  */
-@ManagedBean
+@Named
 @SessionScoped
-public class Manager implements Serializable{
+public class Manager implements Serializable {
     private List<Cedente> cedentes = new ArrayList<>();
     private List<Sacado> sacados = new ArrayList<>();
     private List<ContaBancaria> contas = new ArrayList<>();

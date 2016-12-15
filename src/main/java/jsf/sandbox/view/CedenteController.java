@@ -1,15 +1,16 @@
 package jsf.sandbox.view;
 
-import jsf.sandbox.model.Cedente;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import java.io.Serializable;
 import javax.faces.view.ViewScoped;
+import jsf.sandbox.model.Cedente;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class CedenteController {
+public class CedenteController implements Serializable {
     
-    @ManagedProperty("#{manager}")
+    @Inject
     private Manager gerente;
     private Cedente cedente = new Cedente();
 

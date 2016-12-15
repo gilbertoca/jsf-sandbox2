@@ -1,23 +1,25 @@
 package jsf.sandbox.view;
 
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.List;
 import jsf.sandbox.model.TituloCobranca;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class TituloController {
+public class TituloController implements Serializable {
 
-    @ManagedProperty("#{manager}")
+    @Inject
     private Manager gerente;
     private TituloCobranca tituloCobranca = new TituloCobranca();
-    private boolean edit;
-    @ManagedProperty("#{emissorBoletoBancoBrasil}")
+    private boolean edit = false;
+    private int indexOf;
+    @Inject
     private EmissorBoletoBancoBrasil emissorBoleto;
 
     public void adicionar() {
@@ -33,26 +35,30 @@ public class TituloController {
         System.out.println("Total Titulos AFTER ADD" + gerente.getTitulos().size());
     }
 
-    public void editar(TituloCobranca tituloCobranca) {
-        this.tituloCobranca = gerente.getTitulos().get(gerente.getTitulos().indexOf(tituloCobranca));
+    public void editar(TituloCobranca titulo) {
+        System.out.println("titulo passado como parametro" + titulo);
+        indexOf = gerente.getTitulos().indexOf(titulo);
+        tituloCobranca = gerente.getTitulos().get(indexOf);
         edit = true;
     }
 
     public void salvar() {
         // dao.update(tituloCobranca);
 
-        System.out.println("Alter titulo " + tituloCobranca);
+        System.out.println("titulo obtido com indexOf" + tituloCobranca);
+        gerente.getTitulos().set(indexOf,tituloCobranca);
         tituloCobranca = new TituloCobranca(); // Reset placeholder.
         edit = false;
     }
 
-    public void deletar(TituloCobranca tituloCobranca) {
+    public void deletar(TituloCobranca titulo) {
         // dao.deletar(tituloCobranca);
-        gerente.getTitulos().remove(tituloCobranca);
+        gerente.getTitulos().remove(titulo);
+        edit = false;
     }
 
-    public void emitir(TituloCobranca tituloCobranca) {
-        byte[] pdf = this.emissorBoleto.gerar(tituloCobranca);
+    public void emitir(TituloCobranca titulo) {
+        byte[] pdf = this.emissorBoleto.gerar(titulo);
         enviarBoleto(pdf);
     }
 
@@ -89,8 +95,8 @@ public class TituloController {
         return edit;
     }
 
-    public void setTituloCobranca(TituloCobranca tituloCobranca) {
-        this.tituloCobranca = tituloCobranca;
+    public void setTituloCobranca(TituloCobranca titulo) {
+        this.tituloCobranca = titulo;
     }
 
     public Manager getGerente() {

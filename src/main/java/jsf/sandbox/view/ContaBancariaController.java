@@ -1,21 +1,22 @@
 package jsf.sandbox.view;
 
+import java.io.Serializable;
 import jsf.sandbox.model.Cedente;
 import jsf.sandbox.model.ContaBancaria;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.jrimum.bopepo.BancosSuportados;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class ContaBancariaController {
+public class ContaBancariaController implements Serializable {
     
-    @ManagedProperty("#{manager}")
+    @Inject
     private Manager gerente;    
     private Cedente cedente;
     private ContaBancaria conta = new ContaBancaria();
-    private BancosSuportados bancoSuportado;
+    private BancosSuportados bancoSuportado = BancosSuportados.BANCO_DO_BRASIL;
 
     public void salvar() {
         conta.setNumeroDoBancoBacen(bancoSuportado.getCodigoDeCompensacao());

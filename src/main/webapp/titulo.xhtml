@@ -3,7 +3,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:of="http://omnifaces.org/functions">
 
     <f:metadata>
     </f:metadata>
@@ -14,13 +15,35 @@
         <h1>
             Formulário Título/Cobrança
         </h1> 
-        <h:form rendered="#{not empty tituloController.titulos}">
-            <p:dataTable value="#{tituloController.titulos}" var="item">
-                <p:column><f:facet name="header">ID</f:facet>#{item.id}</p:column>
-                <p:column><f:facet name="header">Conta</f:facet>#{item.conta.conta}</p:column>
-                <p:column><f:facet name="header">Sacado</f:facet>#{item.sacado.nome}</p:column>
-                <p:column><f:facet name="header">Dt. Vencimento</f:facet>#{item.dtVencimento}</p:column>
-                <p:column><f:facet name="header">Value</f:facet>#{item.valor}</p:column>
+        <h:form id="toolbarForm">
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup align="right">
+                    <p:button value="Cedente" outcome="/cedente"/>
+                    <p:button value="Sacado" outcome="/sacado"/>
+                    <p:button value="Conta Bancária" outcome="/conta-bancaria"/>
+                </p:toolbarGroup>
+            </p:toolbar>            
+        </h:form>
+        
+        <p:spacer width="10"/>
+        
+        <h:form id="dataTableForm">
+            <p:dataTable id="tituloTable" value="#{tituloController.titulos}" var="item">
+                <p:column headerText="ID">
+                    <h:outputLabel value="#{item.id}" />
+                </p:column>
+                <p:column headerText="Conta">
+                    <h:outputLabel value="#{item.conta.conta}" />
+                </p:column>
+                <p:column headerText="Sacado">
+                    <h:outputLabel value="#{item.sacado.nome}" />
+                </p:column>
+                <p:column headerText="Dt. Vencimento">
+                    <h:outputLabel value="#{of:formatDate(item.dtVencimento, 'dd/MM/yyyy')}"  />
+                </p:column>
+                <p:column headerText="Value">
+                    <h:outputLabel value="#{item.valor}" />
+                </p:column>
                 <p:column>
                     <p:commandButton value="emitir" action="#{tituloController.emitir(item)}" ajax="false" id="emitir"/>
                     <p:commandButton value="editar" action="#{tituloController.editar(item)}" ajax="false" id="editar"/>
@@ -28,19 +51,22 @@
                 </p:column>
             </p:dataTable>
         </h:form>
-        <p:messages />
-        <h:panelGroup rendered="#{empty tituloController.titulos}">
-            <p>Tabela está vazia! Por favor adicione novos títulos.</p>
-        </h:panelGroup>            
-        <h:panelGroup rendered="#{!tituloController.edit}">
-            <h3>Adicionar Título</h3>
-            <h:form>
+
+        <p:messages autoUpdate="true" globalOnly="true" showDetail="true" />
+
+        <h:form id="tituloForm">
+            <p:panelGrid columns="2" style="width: 100%; margin-top: 20px" columnClasses="rotulo">
+                <f:facet name="header">
+                    <p:outputLabel rendered="#{!tituloController.edit}" value="Adicionar Título" />
+                    <p:outputLabel rendered="#{tituloController.edit}" value="Atualizar Título" />
+                </f:facet>                
                 <p:outputLabel for="conta-bancaria" value="Conta Bancária: " />
                 <p:selectOneMenu id="conta-bancaria" value="#{tituloController.tituloCobranca.conta}" 
                                  converter="omnifaces.SelectItemsConverter">
                     <f:selectItems value="#{tituloController.gerente.contas}" var="conta"
                                    itemValue="#{conta}" itemLabel="#{conta.conta-conta.contaDigito}" />
                 </p:selectOneMenu>                
+
                 <p:outputLabel for="sacado" value="Sacado: " />
                 <p:selectOneMenu id="sacado" value="#{tituloController.tituloCobranca.sacado}" 
                                  converter="omnifaces.SelectItemsConverter">
@@ -48,21 +74,32 @@
                                    itemValue="#{sacado}" itemLabel="#{sacado.nome}" />
                 </p:selectOneMenu>                
 
-                <p>Dt. Vencimento: 
-                    <h:inputText value="#{tituloController.tituloCobranca.dtVencimento}">
-                        <f:convertDateTime type="date" pattern="mm/DD/yyyy" />
-		    </h:inputText>
-                </p>
-                <p>Valor: <h:inputText value="#{tituloController.tituloCobranca.valor}" /></p>
-                <p><p:commandButton value="adicionar" action="#{tituloController.adicionar}" ajax="false" id="adicionar"/></p>
-            </h:form>
-        </h:panelGroup>
-        <h:panelGroup rendered="#{tituloController.edit}">
-            <h3>Editar título #{tituloController.tituloCobranca.id}</h3>
-            <h:form>
-                <p>Valor: <h:inputText value="#{tituloController.tituloCobranca.valor}" /></p>
-                <p><p:commandButton value="Salvar" action="#{tituloController.salvar}" ajax="false" id="salvar"/></p>
-            </h:form>
-        </h:panelGroup>            
+                <p:outputLabel for="sacado" value="Dt. Vencimento: " />
+                <p:inputText value="#{tituloController.tituloCobranca.dtVencimento}">
+                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                </p:inputText>
+
+                <p:outputLabel for="sacado" value="Valor: " />
+                <p:inputText value="#{tituloController.tituloCobranca.valor}" />
+
+                <f:facet name="footer">
+                    <p:commandButton ajax="false" update="tituloForm, dataTableForm:tituloTable"
+                                     id="adicionar"
+                                     process="tituloForm"
+                                     value="Adicionar"
+                                     action="#{tituloController.adicionar()}"
+                                     styleClass="ui-button-info"
+                                     rendered="#{tituloController.edit eq false}"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton ajax="false" update="tituloForm, dataTableForm:tituloTable"
+                                     id="salvar"
+                                     process="tituloForm"
+                                     value="Salvar"
+                                     action="#{tituloController.salvar()}"
+                                     styleClass="ui-button-info"
+                                     rendered="#{tituloController.edit eq true}"/>                    
+                </f:facet>                                
+            </p:panelGrid>
+        </h:form>
     </ui:define>
 </ui:composition>

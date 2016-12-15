@@ -1,9 +1,11 @@
 package jsf.sandbox.view;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
 import jsf.sandbox.model.TituloCobranca;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
@@ -24,10 +26,11 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  *
  * @author gilberto.andrade
  */
-@ManagedBean
-public class EmissorBoletoBancoBrasil {
+@Dependent
+@Named
+public class EmissorBoletoBancoBrasil implements Serializable {
 
-    @ManagedProperty("#{manager}")
+    @Inject
     private Manager gerente;
 
     public byte[] gerar(TituloCobranca tituloCobranca) {
@@ -43,7 +46,7 @@ public class EmissorBoletoBancoBrasil {
          * Não sei por que raios se usa o n. do convênio ao invez da conta corrente
          */
         contaBancaria.setNumeroDaConta(new NumeroDaConta(Integer.valueOf(tituloCobranca.getConta().getNumeroConvenio())));
-
+        String contaDigitoDoCedenteParaExibicao = tituloCobranca.getConta().getConta()+"-"+tituloCobranca.getConta().getAgenciaDigito();
         /*
          * Carteira com no máximo 2 dígitos
          * contaBancaria.setModalidade(new Modalidade(01,"SIMPLES COM REGISTRO"));
@@ -65,23 +68,24 @@ public class EmissorBoletoBancoBrasil {
         Cedente cedente = new Cedente(tituloCobranca.getConta().getTitular().getNome(), tituloCobranca.getConta().getTitular().getCnpj());
 
         Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
-        
+
         /**
-         * 
-        
-        ANEXO IX – COMPOSIÇÃO DO CAMPO “NOSSO NÚMERO” – CONVÊNIO DE 7 POSIÇÕES
-        O nosso número do boleto deve estar de acordo com as normas estabelecidas pelo Banco Brasil.
-        
-        FORMATO “NOSSO NÚMERO” PARA CONVÊNIOS ACIMA DE 1.000.000 (UM MILHÃO): 
-               A composição do nosso número deve obedecer as seguintes regras: CCCCCCCNNNNNNNNNN
-               convênios com numeração acima de 1.000.000, onde:
-                "C" - é o número do convênio fornecido pelo Banco (número fixo e não pode ser alterado)
-                "N" - é um sequencial atribuído pelo cliente
-       
+         *
+         *
+         * ANEXO IX – COMPOSIÇÃO DO CAMPO “NOSSO NÚMERO” – CONVÊNIO DE 7
+         * POSIÇÕES O nosso número do boleto deve estar de acordo com as normas
+         * estabelecidas pelo Banco Brasil.
+         *
+         * FORMATO “NOSSO NÚMERO” PARA CONVÊNIOS ACIMA DE 1.000.000 (UM MILHÃO):
+         * A composição do nosso número deve obedecer as seguintes regras:
+         * CCCCCCCNNNNNNNNNN convênios com numeração acima de 1.000.000, onde:
+         * "C" - é o número do convênio fornecido pelo Banco (número fixo e não
+         * pode ser alterado) "N" - é um sequencial atribuído pelo cliente
+         *
          * Nosso Número de 17 posições
          * tituloCobranca.getConta().getNumeroConvenio()+tituloCobranca.getId()+
          */
-        titulo.setNossoNumero(tituloCobranca.getConta().getNumeroConvenio()+String.format("%010d", tituloCobranca.getId()));
+        titulo.setNossoNumero(tituloCobranca.getConta().getNumeroConvenio() + String.format("%010d", tituloCobranca.getId()));
 
         titulo.setNumeroDoDocumento(tituloCobranca.getId().toString());
         titulo.setValor(tituloCobranca.getValor());
@@ -92,13 +96,23 @@ public class EmissorBoletoBancoBrasil {
         titulo.setAceite(tituloCobranca.isAceite() == true ? Titulo.Aceite.A : Titulo.Aceite.N);
 
         Boleto boleto = new Boleto(titulo);
-        /**
-         * gambiarra para consertar o problema de usar n. do convênio na conta bancária
+        /*
+         * A área do boleto destinada a "Agência/Código do Cedente" deverá exibir a informação
+         * "Agência (com 4 dígitos, zeros a esquerda)/Conta bancária". Ex: 0057/21109-2.
          */
-        String agenciaCodigoCedente = contaBancaria.getAgencia().toString() + " / "+ contaBancaria.getNumeroDaConta().toString();
-        boleto.addTextosExtras("txtFcAgenciaCodigoCedente", agenciaCodigoCedente);        
-        boleto.setLocalPagamento("Pagável em qualquer banco até o vencimento");
-        boleto.setInstrucao1("Não receber após o vencimento");
+        String agenciaCodigoDoCedenteParaExibicao = String.format("%s-%s / %s",
+                titulo.getContaBancaria().getAgencia().getCodigo(),
+                titulo.getContaBancaria().getAgencia().getDigitoVerificador(),
+                contaDigitoDoCedenteParaExibicao);
+        boleto.addTextosExtras("txtFcAgenciaCodigoCedente", agenciaCodigoDoCedenteParaExibicao);
+        boleto.addTextosExtras("txtRsAgenciaCodigoCedente", agenciaCodigoDoCedenteParaExibicao);
+        boleto.setLocalPagamento(tituloCobranca.getConta().getLocalPagamento());
+        boleto.setInstrucao1(tituloCobranca.getConta().getInstrucao1());
+        boleto.setInstrucao2(tituloCobranca.getConta().getInstrucao2());
+        boleto.setInstrucao3(tituloCobranca.getConta().getInstrucao3());
+        boleto.setInstrucao4(tituloCobranca.getConta().getInstrucao4());
+        boleto.setInstrucao5(tituloCobranca.getConta().getInstrucao5());
+        boleto.setInstrucao6(tituloCobranca.getConta().getInstrucao6());
         BoletoViewer boletoViewer = new BoletoViewer(boleto);
         return boletoViewer.getPdfAsByteArray();
     }

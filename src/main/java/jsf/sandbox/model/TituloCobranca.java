@@ -1,7 +1,6 @@
 package jsf.sandbox.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -159,14 +158,14 @@ public class TituloCobranca {
         StringBuilder builder = new StringBuilder();
         builder.append("TituloCobranca [");
         builder.append("aceite=").append(aceite);
-        builder.append(", conta=").append(conta);
+        builder.append(", conta=").append(conta.getConta());
         builder.append(", documento=").append(documento);
         builder.append(", dtEmissao=").append(dtEmissao);
         builder.append(", dtVencimento=").append(dtVencimento);
         builder.append(", juros=").append(juros);
         builder.append(", multa=").append(multa);
         builder.append(", nossoNumero=").append(nossoNumero);
-        builder.append(", sacado=").append(sacado);
+        builder.append(", sacado=").append(sacado.getNome());
         builder.append(", situacao=").append(situacao);
         builder.append(", tipo=").append(tipo);
         builder.append(", valor=").append(valor);

@@ -1,14 +1,15 @@
 package jsf.sandbox.view;
 
+import java.io.Serializable;
 import jsf.sandbox.model.Sacado;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class SacadoController {
-    @ManagedProperty("#{manager}")
+public class SacadoController implements Serializable {
+    @Inject
     private Manager gerente;
     private Sacado sacado = new Sacado();
 
