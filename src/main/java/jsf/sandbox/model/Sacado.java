@@ -15,6 +15,19 @@ public class Sacado {
     private String cidade;
     private String cep;
 
+    public Sacado() {
+    }
+
+    public Sacado(String cpf, String nome, String logradouro, String complemento, String bairro, String cidade, String cep) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.logradouro = logradouro;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.cep = cep;
+    }
+    
     public String getCpf() {
         return cpf;
     }

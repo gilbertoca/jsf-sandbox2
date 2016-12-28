@@ -8,26 +8,45 @@ import java.util.Objects;
  * @author gilberto.andrade
  */
 public class ContaBancaria {
-	private String NumeroDoBancoBacen;
-	private String agencia;
-	private String agenciaDigito;
-	private String conta;
-	private String contaDigito;
-        private String numeroConvenio;
-	private String carteira;
-	private String modalidade;   
-        //mensagens
-	private String localPagamento;    
-	private String instrucao1;    
-	private String instrucao2;    
-	private String instrucao3;    
-	private String instrucao4;    
-	private String instrucao5;    
-	private String instrucao6;    
 
-	private Cedente titular;
-	
-	private Collection<TituloCobranca> titulos;
+    private String NumeroDoBancoBacen;
+    private String agencia;
+    private String agenciaDigito;
+    private String conta;
+    private String contaDigito;
+    private String numeroConvenio;
+    private String carteira;
+    private String modalidade;
+    //mensagens
+    private String localPagamento;
+    private String instrucao1;
+    private String instrucao2;
+    private String instrucao3;
+    private String instrucao4;
+    private String instrucao5;
+    private String instrucao6;
+
+    private Cedente titular;
+
+    private Collection<TituloCobranca> titulos;
+
+    public ContaBancaria() {
+    }
+
+    public ContaBancaria(String NumeroDoBancoBacen, String agencia, String agenciaDigito, String conta, String contaDigito, String numeroConvenio, String carteira, String modalidade, String localPagamento, String instrucao1, String instrucao2, Cedente titular) {
+        this.NumeroDoBancoBacen = NumeroDoBancoBacen;
+        this.agencia = agencia;
+        this.agenciaDigito = agenciaDigito;
+        this.conta = conta;
+        this.contaDigito = contaDigito;
+        this.numeroConvenio = numeroConvenio;
+        this.carteira = carteira;
+        this.modalidade = modalidade;
+        this.localPagamento = localPagamento;
+        this.instrucao1 = instrucao1;
+        this.instrucao2 = instrucao2;
+        this.titular = titular;
+    }
 
     public String getNumeroDoBancoBacen() {
         return NumeroDoBancoBacen;
@@ -201,8 +220,6 @@ public class ContaBancaria {
         }
         return true;
     }
-    
-    
 
     @Override
     public String toString() {
@@ -226,5 +243,5 @@ public class ContaBancaria {
         builder.append("]");
         return builder.toString();
     }
-        
+
 }

@@ -1,5 +1,6 @@
 package jsf.sandbox.view;
 
+import jsf.sandbox.service.Manager;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
@@ -116,6 +117,7 @@ public class EmissorBoletoBancoBrasil implements Serializable {
         boleto.setInstrucao5(tituloCobranca.getConta().getInstrucao5());
         boleto.setInstrucao6(tituloCobranca.getConta().getInstrucao6());
         BoletoViewer boletoViewer = new BoletoViewer(boleto);
+        boletoViewer.setImprimeReciboEntrega(true);
         return boletoViewer.getPdfAsByteArray();
     }
 

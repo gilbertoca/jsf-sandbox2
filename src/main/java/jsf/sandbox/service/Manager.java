@@ -1,4 +1,4 @@
-package jsf.sandbox.view;
+package jsf.sandbox.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +22,13 @@ public class Manager implements Serializable {
     private List<ContaBancaria> contas = new ArrayList<>();
     private List<TituloCobranca> titulos = new ArrayList<>();
 
+    public Manager() {
+        Cedente cedente = new Cedente("00.000.000/0001-91", "JRimum Enterprise", "logradouro", "complemento", "bairro", "cidade", "cep");
+        cedentes.add(cedente);
+        sacados.add(new Sacado("222.222.222-22", "JavaDeveloper Pronto Para Férias", "logradouro", "complemento", "bairro", "cidade", "cep"));
+        contas.add(new ContaBancaria("001", "616", "5", "1708027", "0", "1708027", "17", "4", "Em qualquer agência", "instrucao1", "instrucao2", cedente));
+    }
+    
     public List<Cedente> getCedentes() {
         return cedentes;
     }

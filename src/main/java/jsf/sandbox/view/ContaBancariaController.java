@@ -1,5 +1,6 @@
 package jsf.sandbox.view;
 
+import jsf.sandbox.service.Manager;
 import java.io.Serializable;
 import jsf.sandbox.model.Cedente;
 import jsf.sandbox.model.ContaBancaria;

@@ -15,6 +15,19 @@ public class Cedente {
     private String cidade;
     private String cep;
 
+    public Cedente() {
+    }
+
+    public Cedente(String cnpj, String nome, String logradouro, String complemento, String bairro, String cidade, String cep) {
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.logradouro = logradouro;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.cep = cep;
+    }
+
     public String getCnpj() {
         return cnpj;
     }

@@ -1,5 +1,6 @@
 package jsf.sandbox.view;
 
+import jsf.sandbox.service.Manager;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
