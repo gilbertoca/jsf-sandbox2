@@ -5,7 +5,7 @@
 
     <groupId>jsf.sandbox</groupId>
     <artifactId>jsf-sandbox2</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
  <name>CDI JSF/PrimeFaces Jetty/Tomcat plugin Example</name>
     <url>https://github.com/gilbertoca/jsf-sandbox2</url>
@@ -16,10 +16,11 @@
         <java.version>1.8</java.version>
         <servlet.version>3.1.0</servlet.version>
         <jsf.version>2.2.14</jsf.version>
+        <omnifaces.version>2.4</omnifaces.version>
         <primefaces.version>6.0</primefaces.version>
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <maven.war.plugin.version>2.6</maven.war.plugin.version>
-        <jetty.maven.plugin.version>jetty-9.4.0.RC2</jetty.maven.plugin.version>
+        <jetty.maven.plugin.version>9.4.0.v20161208</jetty.maven.plugin.version>
         <tomcat.maven.plugin.version>3.0-r1655215</tomcat.maven.plugin.version>
     </properties>
 
@@ -51,7 +52,7 @@
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
-            <version>2.4</version>
+            <version>${omnifaces.version}</version>
         </dependency>                
         <!-- PrimeFaces -->
         <dependency>
@@ -85,7 +86,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.0.RC3</version>
+                <version>${jetty.maven.plugin.version}</version>
                 <configuration>
                     <!-- A number greater than 0 enables it. 
                     <scanIntervalSeconds>6</scanIntervalSeconds-->                    
