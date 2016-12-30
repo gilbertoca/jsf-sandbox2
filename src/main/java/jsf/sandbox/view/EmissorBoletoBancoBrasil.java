@@ -117,7 +117,7 @@ public class EmissorBoletoBancoBrasil implements Serializable {
         boleto.setInstrucao5(tituloCobranca.getConta().getInstrucao5());
         boleto.setInstrucao6(tituloCobranca.getConta().getInstrucao6());
         BoletoViewer boletoViewer = new BoletoViewer(boleto);
-        boletoViewer.setImprimeReciboEntrega(true);
+        //boletoViewer.setImprimeReciboEntrega(true);
         return boletoViewer.getPdfAsByteArray();
     }
 
