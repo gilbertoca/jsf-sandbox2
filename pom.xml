@@ -60,17 +60,11 @@
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
         </dependency>
-        <!-- Bopepo -->
+        <!-- stella-boleto -->
         <dependency>
-            <groupId>org.jrimum</groupId>
-            <artifactId>jrimum-bopepo</artifactId>
-            <version>0.2.3-DEV-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jrimum</groupId>
-            <artifactId>jrimum-texgit</artifactId>
-            <version>0.2.3-DEV-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>br.com.caelum.stella</groupId>
+            <artifactId>caelum-stella-boleto</artifactId>
+            <version>2.1.2</version>
         </dependency>
     </dependencies>
 
@@ -121,12 +115,6 @@
         </plugins>
     </build>
     <repositories>
-        <repository>
-            <id>jrimum.org</id>
-            <url>http://jrimum.org/maven/content/groups/public</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
+    
     </repositories>
 </project>

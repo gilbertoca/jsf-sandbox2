@@ -7,7 +7,6 @@ import jsf.sandbox.model.ContaBancaria;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.jrimum.bopepo.BancosSuportados;
 
 @Named
 @ViewScoped
@@ -17,10 +16,10 @@ public class ContaBancariaController implements Serializable {
     private Manager gerente;    
     private Cedente cedente;
     private ContaBancaria conta = new ContaBancaria();
-    private BancosSuportados bancoSuportado = BancosSuportados.BANCO_DO_BRASIL;
+    private String bancoSuportado = "BANCO DO BRASIL S.A.";
 
     public void salvar() {
-        conta.setNumeroDoBancoBacen(bancoSuportado.getCodigoDeCompensacao());
+        conta.setNumeroDoBancoBacen("001");
         conta.setTitular(cedente);
         System.out.println(conta + " Banco Suportado: " + bancoSuportado);
         gerente.getContas().add(conta);
@@ -34,14 +33,6 @@ public class ContaBancariaController implements Serializable {
         this.conta = conta;
     }
 
-    public BancosSuportados getBancoSuportado() {
-        return bancoSuportado;
-    }
-
-    public void setBancoSuportado(BancosSuportados bancoSuportado) {
-        this.bancoSuportado = bancoSuportado;
-    }
-
     public Cedente getCedente() {
         return cedente;
     }
@@ -50,9 +41,6 @@ public class ContaBancariaController implements Serializable {
         this.cedente = cedente;
     }
 
-    public BancosSuportados[] getBancos() {
-        return BancosSuportados.values();
-    }    
     public Manager getGerente() {
         return gerente;
     }
