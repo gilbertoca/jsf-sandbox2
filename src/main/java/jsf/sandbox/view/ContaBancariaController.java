@@ -48,5 +48,12 @@ public class ContaBancariaController implements Serializable {
     public void setGerente(Manager gerente) {
         this.gerente = gerente;
     }
-        
+
+    public String getBancoSuportado() {
+        return bancoSuportado;
+    }
+
+    public void setBancoSuportado(String bancoSuportado) {
+        this.bancoSuportado = bancoSuportado;
+    }
 }

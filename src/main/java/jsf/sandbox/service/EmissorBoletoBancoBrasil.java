@@ -1,11 +1,10 @@
-package jsf.sandbox.view;
+package jsf.sandbox.service;
 
 import br.com.caelum.stella.boleto.Banco;
 import br.com.caelum.stella.boleto.Beneficiario;
 import br.com.caelum.stella.boleto.Boleto;
 import br.com.caelum.stella.boleto.Datas;
 import br.com.caelum.stella.boleto.Endereco;
-import jsf.sandbox.service.Manager;
 import java.io.File;
 import java.io.Serializable;
 import javax.enterprise.context.Dependent;
@@ -15,6 +14,10 @@ import jsf.sandbox.model.TituloCobranca;
 import br.com.caelum.stella.boleto.Pagador;
 import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+import java.util.Calendar;
+import jsf.sandbox.model.Cedente;
+import jsf.sandbox.model.ContaBancaria;
+import jsf.sandbox.model.Sacado;
 
 /**
  *
@@ -28,41 +31,49 @@ public class EmissorBoletoBancoBrasil implements Serializable {
     private Manager gerente;
 
     public byte[] gerar(TituloCobranca tituloCobranca) {
-
+        Cedente titular = tituloCobranca.getConta().getTitular();
+        ContaBancaria conta = tituloCobranca.getConta();
+        Sacado sacado = tituloCobranca.getSacado();
+        Calendar tCalendar = Calendar.getInstance();
+        tCalendar.setTime(tituloCobranca.getDtVencimento());
+        String nossoNumero = conta.getNumeroConvenio() + String.format("%010d", tituloCobranca.getId());
+        
+        System.out.println("-----------Nosso numero " + nossoNumero);
         Datas datas = Datas.novasDatas()
-                .comDocumento(1, 5, 2008)
-                .comProcessamento(1, 5, 2008)
-                .comVencimento(2, 5, 2008);
+                .comVencimento(tCalendar);
 
         Endereco enderecoBeneficiario = Endereco.novoEndereco()
-                .comLogradouro("Av das Empresas, 555")
-                .comBairro("Bairro Grande")
-                .comCep("01234-555")
-                .comCidade("São Paulo")
-                .comUf("SP");
+                .comLogradouro(titular.getLogradouro())
+                .comBairro(titular.getBairro())
+                .comCep(titular.getCep())
+                .comCidade(titular.getCidade())
+                .comUf("TO");
 
         //Quem emite o boleto
         Beneficiario beneficiario = Beneficiario.novoBeneficiario()
-                .comNomeBeneficiario("Fulano de Tal")
-                .comAgencia("1824").comDigitoAgencia("4")
-                .comCodigoBeneficiario("76000")
-                .comDigitoCodigoBeneficiario("5")
-                .comNumeroConvenio("1207113")
-                .comCarteira("18")
+                .comNomeBeneficiario(titular.getNome())
+                .comAgencia(conta.getAgencia()).comDigitoAgencia(conta.getAgenciaDigito())
+                //CNPJ 00000000000000
+                .comDocumento(titular.getCnpj())
+                .comCodigoBeneficiario(conta.getConta())
+                .comDigitoCodigoBeneficiario(conta.getContaDigito())
+                .comNumeroConvenio(conta.getNumeroConvenio())
+                .comCarteira(conta.getCarteira())
                 .comEndereco(enderecoBeneficiario)
-                .comNossoNumero("9000206");
+                //Nosso Número de 17 posições
+                .comNossoNumero(nossoNumero);
 
         Endereco enderecoPagador = Endereco.novoEndereco()
-                .comLogradouro("Av dos testes, 111 apto 333")
-                .comBairro("Bairro Teste")
-                .comCep("01234-111")
-                .comCidade("São Paulo")
-                .comUf("SP");
+                .comLogradouro(sacado.getLogradouro())
+                .comBairro(sacado.getBairro())
+                .comCep(sacado.getCep())
+                .comCidade(sacado.getCidade())
+                .comUf("TO");
 
         //Quem paga o boleto
         Pagador pagador = Pagador.novoPagador()
-                .comNome("Fulano da Silva")
-                .comDocumento("111.222.333-12")
+                .comNome(sacado.getNome())
+                .comDocumento(sacado.getCpf())
                 .comEndereco(enderecoPagador);
 
         Banco banco = new BancoDoBrasil();
@@ -70,12 +81,13 @@ public class EmissorBoletoBancoBrasil implements Serializable {
         Boleto boleto = Boleto.novoBoleto()
                 .comBanco(banco)
                 .comDatas(datas)
+                .comEspecieDocumento("DM")
                 .comBeneficiario(beneficiario)
                 .comPagador(pagador)
-                .comValorBoleto("200.00")
-                .comNumeroDoDocumento("1234")
-                .comInstrucoes("instrucao 1", "instrucao 2", "instrucao 3", "instrucao 4", "instrucao 5")
-                .comLocaisDePagamento("local 1", "local 2");
+                .comValorBoleto(tituloCobranca.getValor())
+                .comNumeroDoDocumento(tituloCobranca.getId().toString())
+                .comInstrucoes(conta.getInstrucao1(), conta.getInstrucao2(), conta.getInstrucao3(), conta.getInstrucao4(), conta.getInstrucao5())
+                .comLocaisDePagamento(conta.getLocalPagamento());
 
         GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
 
