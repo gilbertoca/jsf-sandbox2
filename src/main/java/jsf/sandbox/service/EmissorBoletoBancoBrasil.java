@@ -36,6 +36,24 @@ public class EmissorBoletoBancoBrasil implements Serializable {
         Sacado sacado = tituloCobranca.getSacado();
         Calendar tCalendar = Calendar.getInstance();
         tCalendar.setTime(tituloCobranca.getDtVencimento());
+        
+        /**
+         *
+         *
+         * ANEXO IX – COMPOSIÇÃO DO CAMPO “NOSSO NÚMERO” – CONVÊNIO DE 7
+         * POSIÇÕES O nosso número do boleto deve estar de acordo com as normas
+         * estabelecidas pelo Banco Brasil.
+         *
+         * FORMATO “NOSSO NÚMERO” PARA CONVÊNIOS ACIMA DE 1.000.000 (UM MILHÃO):
+         * A composição do nosso número deve obedecer as seguintes regras:
+         * CCCCCCCNNNNNNNNNN convênios com numeração acima de 1.000.000, onde:
+         * "C" - é o número do convênio fornecido pelo Banco (número fixo e não
+         * pode ser alterado) "N" - é um sequencial atribuído pelo cliente
+         *
+         * Nosso Número de 17 posições
+         * tituloCobranca.getConta().getNumeroConvenio()+tituloCobranca.getId()+
+         */
+        
         String nossoNumero = conta.getNumeroConvenio() + String.format("%010d", tituloCobranca.getId());
         
         System.out.println("-----------Nosso numero " + nossoNumero);
@@ -81,7 +99,8 @@ public class EmissorBoletoBancoBrasil implements Serializable {
         Boleto boleto = Boleto.novoBoleto()
                 .comBanco(banco)
                 .comDatas(datas)
-                .comEspecieDocumento("DM")
+                //Nota Promissória
+                .comEspecieDocumento("NP")
                 .comBeneficiario(beneficiario)
                 .comPagador(pagador)
                 .comValorBoleto(tituloCobranca.getValor())
@@ -90,33 +109,6 @@ public class EmissorBoletoBancoBrasil implements Serializable {
                 .comLocaisDePagamento(conta.getLocalPagamento());
 
         GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
-
-        /**
-         *
-         *
-         * ANEXO IX – COMPOSIÇÃO DO CAMPO “NOSSO NÚMERO” – CONVÊNIO DE 7
-         * POSIÇÕES O nosso número do boleto deve estar de acordo com as normas
-         * estabelecidas pelo Banco Brasil.
-         *
-         * FORMATO “NOSSO NÚMERO” PARA CONVÊNIOS ACIMA DE 1.000.000 (UM MILHÃO):
-         * A composição do nosso número deve obedecer as seguintes regras:
-         * CCCCCCCNNNNNNNNNN convênios com numeração acima de 1.000.000, onde:
-         * "C" - é o número do convênio fornecido pelo Banco (número fixo e não
-         * pode ser alterado) "N" - é um sequencial atribuído pelo cliente
-         *
-         * Nosso Número de 17 posições
-         * tituloCobranca.getConta().getNumeroConvenio()+tituloCobranca.getId()+
-         */
-//        titulo.setNossoNumero(tituloCobranca.getConta().getNumeroConvenio() + String.format("%010d", tituloCobranca.getId()));
-//
-//        titulo.setNumeroDoDocumento(tituloCobranca.getId().toString());
-//        titulo.setValor(tituloCobranca.getValor());
-//        titulo.setDataDoDocumento(new Date());
-//        titulo.setDataDoVencimento(tituloCobranca.getDtVencimento());
-//        //tituloCobranca.getTipo()
-//        titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
-//        titulo.setAceite(tituloCobranca.isAceite() == true ? Titulo.Aceite.A : Titulo.Aceite.N);
-        //boletoViewer.setImprimeReciboEntrega(true);
         return gerador.geraPDF();
     }
 
