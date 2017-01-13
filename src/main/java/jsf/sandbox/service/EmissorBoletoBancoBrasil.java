@@ -78,6 +78,7 @@ public class EmissorBoletoBancoBrasil implements Serializable {
                 .comNumeroConvenio(conta.getNumeroConvenio())
                 .comCarteira(conta.getCarteira())
                 .comEndereco(enderecoBeneficiario)
+                .comModalidade('C')
                 //Nosso Número de 17 posições
                 .comNossoNumero(nossoNumero);
 
