@@ -26,7 +26,11 @@ public class Manager implements Serializable {
         Cedente cedente = new Cedente("00000000000191", "JRimum Enterprise", "logradouro", "complemento", "bairro", "cidade", "cep");
         cedentes.add(cedente);
         sacados.add(new Sacado("22222222222", "JavaDeveloper Pronto Para Férias", "logradouro", "complemento", "bairro", "cidade", "cep"));
-        contas.add(new ContaBancaria("001", "616", "5", "1708027", "8", "2855943", "17", "4", "Em qualquer agência", "instrucao1", "instrucao2", cedente));
+        final ContaBancaria contaBancaria = new ContaBancaria("001", "616", "5", "1708027", "8", "2855943", "17", "4", "Em qualquer agência", "instrucao1", "instrucao2", cedente);
+        contaBancaria.setInstrucao3("instrucao3");
+        contaBancaria.setInstrucao4("instrucao4");
+        contaBancaria.setInstrucao5("instrucao5");
+        contas.add(contaBancaria);
     }
     
     public List<Cedente> getCedentes() {
