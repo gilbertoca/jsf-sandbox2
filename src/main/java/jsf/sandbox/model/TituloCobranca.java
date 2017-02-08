@@ -18,9 +18,11 @@ public class TituloCobranca {
     private String nossoNumero;
     private Date dtEmissao;
     private Date dtVencimento;
-    private BigDecimal valor;
-    private BigDecimal juros;
-    private BigDecimal multa;
+    private Date dtDescontoAte;
+    private BigDecimal valor = BigDecimal.ZERO;
+    private BigDecimal desconto = BigDecimal.ZERO;
+    private BigDecimal juros = BigDecimal.ZERO;
+    private BigDecimal multa = BigDecimal.ZERO;
     private Situacao situacao = Situacao.PENDENTE;
 
     public Integer getId() {
@@ -87,6 +89,14 @@ public class TituloCobranca {
         this.dtEmissao = dtEmissao;
     }
 
+    public Date getDtDescontoAte() {
+        return dtDescontoAte;
+    }
+
+    public void setDtDescontoAte(Date dtDescontoAte) {
+        this.dtDescontoAte = dtDescontoAte;
+    }
+    
     public Date getDtVencimento() {
         return dtVencimento;
     }
@@ -103,6 +113,14 @@ public class TituloCobranca {
         this.valor = valor;
     }
 
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
+    }
+    
     public BigDecimal getJuros() {
         return juros;
     }
@@ -162,12 +180,14 @@ public class TituloCobranca {
         builder.append(", documento=").append(documento);
         builder.append(", dtEmissao=").append(dtEmissao);
         builder.append(", dtVencimento=").append(dtVencimento);
-        builder.append(", juros=").append(juros);
-        builder.append(", multa=").append(multa);
+        builder.append(", dtDescontoAte=").append(dtDescontoAte);
         builder.append(", nossoNumero=").append(nossoNumero);
         builder.append(", sacado=").append(sacado.getNome());
         builder.append(", situacao=").append(situacao);
         builder.append(", tipo=").append(tipo);
+        builder.append(", juros=").append(juros);
+        builder.append(", multa=").append(multa);
+        builder.append(", desconto=").append(desconto);
         builder.append(", valor=").append(valor);
         builder.append("]");
         return builder.toString();

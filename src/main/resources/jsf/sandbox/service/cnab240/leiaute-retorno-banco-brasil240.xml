@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<txg:Texgit xmlns:txg="http://jrimum.org/texgit"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://jrimum.org/texgit http://jrimum.org/texgit/chrome/site/TexgitSchema.xsd" 
+            version="1.0-academic">
+
+    <FlatFile>
+        <layout>
+            <name>
+                Laiaute CNAB 240 Banco do Brasil
+            </name>
+            <version>1.0 / 02 FEV 2017</version>
+            <description>
+                Tamanho dos registros:
+                240 Bytes
+
+
+                Títulos em cobrança:
+                Segmentos
+                ------------------------------------
+                REMESSA          |     RETRONO
+                ------------------------------------
+                P (Obrigatório)  |     T (Obrigatório)
+                Q (Obrigatório)  |     U (Obrigatório)
+                R (Opcional)     |     Y (Opcional)
+                S (Opcional)     | 
+                Y (Opcional)     |
+
+
+                Disposição do arquivo remessa:
+                HEADER DE ARQUIVO
+                HEADER DE LOTE - Serviço/Produto = Cobrança-Retorno
+                SEGMENTO T (OBRIGATÓRIO)
+                SEGMENTO U (OBRIGATÓRIO)
+                SEGMENTO Y (Opcional)
+                TRAILER DE LOTE - Serviço/Produto = Cobrança-Retorno
+                TRAILLER DE ARQUIVO
+            </description>
+        </layout>
+        <GroupOfRecords>
+            <!-- Início do arquivo -->
+            <Record name="HeaderArquivo">
+                <GroupOfFields>
+                    <!-- Identificador do registro 0 -->
+                    <IdType name="TipoRegistro" length="1" position="3" value="0"/>
+                    <Field name="CodigoBancoCompensacao" length="3" value="1" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="LoteServico" length="4" value="0000" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="CNAB1" length="9" value=" " type="STRING" padding="WHITE_SPACE_LEFT"/>
+                    <Field name="TipoInscricaoEmpresa" length="1" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NumeroInscricaoEmpresa" length="14" type="LONG" padding="ZERO_LEFT"/>
+                    <Field name="CodigoConvenio" length="20" type="STRING" padding="WHITE_SPACE_RIGHT"/>
+                    <Field name="AgenciaMantenedora" length="5" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="DigitoVerificadorAgencia" length="1" type="STRING"/>
+                    <Field name="NumeroContaCorrente" length="12" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="DigitoVerificadorContaCorrente" length="1" type="STRING"/>
+                    <Field name="DigitoVerificadorAgenciaConta" length="1" type="STRING"/>
+                    <Field name="NomeEmpresa" length="30" type="STRING" padding="WHITE_SPACE_RIGHT"/>
+                    <Field name="NomeBanco" length="30" value="Banco do Brasil" type="STRING" padding="WHITE_SPACE_RIGHT"/>
+                    <Field name="CNAB2" length="10" value=" " type="STRING" padding="WHITE_SPACE_LEFT"/>
+                    <Field name="CodigoRemessaRetorno" length="2" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="DataGeracaoArquivo" length="8" type="DATE" format="DATE_DDMMYYYY" padding="ZERO_LEFT" />
+                    <Field name="HoraGeracaoArquivo" length="6" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NumeroSequencialArquivo" length="6" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NumeroVersaoLayoutArquivo" length="3" value="101" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="DensidadeGravacaoArquivo" length="5" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="UsoReservadoBanco" length="20" type="STRING" padding="WHITE_SPACE_RIGHT"/>
+                    <Field name="UsoReservadoEmpresa" length="20" type="STRING" padding="WHITE_SPACE_RIGHT"/>
+                    <Field name="CNAB3" length="29" value=" " type="STRING" padding="WHITE_SPACE_RIGHT"/>
+                </GroupOfFields>
+            </Record>
+            <!-- Inicio de Lote Serviço/Produto = 3.2.2 - Títulos em Cobrança -->
+            <Record name="HeaderLote">
+                <GroupOfFields>
+                    <!-- Identificador do registro 1 -->
+                    <IdType name="TipoRegistro" value="1" length="1" position="3"/>
+                    <Field name="CodigoBancoCompensacao" padding="ZERO_LEFT" type="INTEGER" length="3" value="1" />
+                    <Field name="LoteServico" padding="ZERO_LEFT" type="INTEGER" length="4" />
+                    <Field name="TipoOperacao" padding="ZERO_LEFT" type="STRING" length="1" value="R" />
+                    <Field name="TipoServico" padding="ZERO_LEFT" type="INTEGER" length="2" value="01" />
+                    <Field name="CNAB1" padding="WHITE_SPACE_RIGHT" type="STRING" length="2" value=" " />
+                    <Field name="NumeroVersaoLayoutLote" padding="ZERO_LEFT" type="INTEGER" length="3" value="060" />
+                    <Field name="CNAB2" type="STRING" length="1" value=" " />
+                    <Field name="TipoInscricaoEmpresa" type="INTEGER" length="1" />
+                    <Field name="NumeroInscricaoEmpresa" padding="ZERO_LEFT" type="LONG" length="15" />
+                    <Field name="CodigoConvenio" padding="WHITE_SPACE_RIGHT" type="STRING" length="20" />
+                    <Field name="AgenciaMantenedora" padding="ZERO_LEFT" type="INTEGER" length="5" />
+                    <Field name="DigitoVerificadorAgencia" type="STRING" length="1" />
+                    <Field name="NumeroContaCorrente" padding="ZERO_LEFT" type="INTEGER" length="12" />
+                    <Field name="DigitoVerificadorContaCorrente" type="STRING" length="1" />
+                    <Field name="DigitoVerificadorAgenciaConta" type="STRING" length="1" />
+                    <Field name="NomeEmpresa" padding="WHITE_SPACE_RIGHT" type="STRING" length="30" />
+                    <Field name="Mensagem1" padding="WHITE_SPACE_RIGHT" type="STRING" length="40" />
+                    <Field name="Mensagem2" padding="WHITE_SPACE_RIGHT" type="STRING" length="40" />
+                    <Field name="NumeroRemessaRetorno" padding="ZERO_LEFT" type="INTEGER" length="8" />
+                    <Field name="DataGravacaoRemessaRetorno" length="8" type="DATE" format="DATE_DDMMYYYY" padding="ZERO_LEFT" />
+                    <Field name="DataCredito" length="8" type="DATE" format="DATE_DDMMYYYY" padding="ZERO_LEFT" />
+                    <Field name="CNAB3" padding="WHITE_SPACE_RIGHT" type="STRING" length="33" value=" " />                    
+                </GroupOfFields>
+            </Record>                
+            <!-- SEGMENTO T -->
+            <Record name="RegistroDetalheSegmentoT" repeatable="true">
+                <GroupOfFields>
+                    <!-- Identificador do registro T -->
+                    <IdType name="CodigoSegmentoRegistroDetalhe" value="T" length="1" position="5"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="3" value="1" name="CodigoBanco"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="4" name="LoteServico"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="1" value="3" name="TipoRegistro"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="5" name="NumeroSequencialRegistro"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="1" value=" " name="CNAB1"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="2" name="CodigoMovimentoRetorno"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="5" name="AgenciaMantenedora"/>
+                    <Field type="STRING" length="1" name="DigitoVerificadorAgencia"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="12" name="NumeroContaCorrente"/>
+                    <Field type="STRING" length="1" name="DigitoVerificadorContaCorrente"/>
+                    <Field type="STRING" length="1" name="DigitoVerificadorAgenciaConta"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="20" name="IdentificadorTitulo"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="1" name="CodigoCarteira"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="15" name="NumeroDocumentoCobranca"/>
+                    <Field padding="ZERO_LEFT" type="DATE" length="8" name="DataVencimentoTitulo">
+                        <Formatter type="DATE" format="ddMMyyyy" />
+                    </Field>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="15" name="ValorNominalTitulo"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="3" name="NumeroBanco"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="5" name="AgenciaCobradoraRecebedora"/>
+                    <Field type="STRING" length="1" name="DigitoVerificadorAgenciaCobradora"/>
+                    <Field type="STRING" length="25" name="IdentificadorTituloEmpresa"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="2" name="CodigoMoeda"/>
+                    <Field padding="ZERO_LEFT" type="INTEGER" length="1" name="TipoInscricaoSacadoAvalista"/>
+                    <Field padding="ZERO_LEFT" type="LONG" length="15" name="NumeroInscricaoSacadoAvalista"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="40" name="NomeSacadorAvalista"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="10" name="NumeroContratoOperacaoCredito"/>
+                    <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorTarifaCustas"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="10" name="IdentificadorRejeicao"/>
+                    <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="17" value=" " name="CNAB2"/>
+                </GroupOfFields>
+                <GroupOfInnerRecords>
+                    <!-- SEGMENTO U -->
+                    <Record name="RegistroDetalheSegmentoU">
+                        <GroupOfFields>
+                            <!-- Identificador do registro U -->
+                            <IdType name="CodigoSegmentoRegistroDetalhe" value="U" length="1" position="5" />
+                            <Field padding="ZERO_LEFT" type="INTEGER" length="3" value="1" name="CodigoBanco"/>
+                            <Field padding="ZERO_LEFT" type="INTEGER" length="4" name="LoteServico"/>
+                            <Field padding="ZERO_LEFT" type="INTEGER" length="1" value="3" name="TipoRegistro"/>
+                            <Field padding="ZERO_LEFT" type="INTEGER" length="5" name="NumeroSequencialRegistro"/>
+                            <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="1" value=" " name="CNAB1"/>
+                            <Field padding="ZERO_LEFT" type="INTEGER" length="2" name="CodigoMovimentoRetorno"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="JurosMultaEncargos"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorDesconto"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorAbatimento"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorIOF"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorPagoSacado"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorLiquidoCreditado"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorOutrasDespesas"/>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorOutrosCreditos"/>
+                            <Field padding="ZERO_LEFT" type="DATE" length="8" name="DataOcorrenciaPagamento">
+                                <Formatter type="DATE" format="ddMMyyyy" />
+                            </Field>
+                            <Field padding="ZERO_LEFT" type="DATE" length="8" name="DataEfetivacaoCredito">
+                                <Formatter type="DATE" format="ddMMyyyy" />
+                            </Field>
+                            <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="4" value=" " name="CodigoOcorrencia"/>
+                            <Field padding="ZERO_LEFT" type="DATE" length="8" name="DataOcorrencia">
+                                <Formatter type="DATE" format="ddMMyyyy" />
+                            </Field>
+                            <Field padding="ZERO_LEFT" type="LONG" length="15" name="ValorOcorrencia"/>
+                            <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="30" value=" " name="ComplementoOcorrencia"/>
+                            <Field padding="ZERO_LEFT" type="INTEGER" length="3" name="CodigoBancoCorrespondenteCompe"/>
+                            <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="20" name="NossoNumeroBancoCorrespondente"/>
+                            <Field padding="WHITE_SPACE_RIGHT" type="STRING" length="7" value=" " name="CNAB2"/>
+                        </GroupOfFields>
+                    </Record>
+                    <!-- SEGMENTO Y -->
+                    <Record name="RegistroDetalheSegmentoY">
+                        <GroupOfFields>
+                            <!-- Identificador do registro Y 
+                            Registro Opcional para Informação de Dados do Sacador Avalista
+                            -->
+                            <IdType name="CodigoSegmentoRegistroDetalhe" value="Y" length="1" position="5" />
+                            <Field name="CodigoBancoCompensacao" padding="ZERO_LEFT" type="INTEGER" length="3" value="1" />
+                            <Field name="LoteServico" padding="ZERO_LEFT" type="INTEGER" length="4" />
+                            <Field name="TipoRegistro" padding="ZERO_LEFT" type="INTEGER" length="1" value="3" />
+                            <Field name="NumeroSequencialRegistro" padding="ZERO_LEFT" type="INTEGER" length="5" />
+                            <Field name="CNAB1" padding="WHITE_SPACE_RIGHT" type="STRING" length="1" value=" " />
+                            <Field name="CodigoMovimentoRemessa" padding="ZERO_LEFT" type="INTEGER" length="2" />
+                            <Field name="TipoInscricaoSacadoAvalista" padding="ZERO_LEFT" type="INTEGER" length="1" />
+                            <Field name="NumeroInscricaoSacadoAvalista" padding="ZERO_LEFT" type="LONG" length="15" />
+                            <Field name="NomeSacadoAvalista" padding="WHITE_SPACE_RIGHT" type="STRING" length="40" />
+                            <Field name="Endereco" padding="WHITE_SPACE_RIGHT" type="STRING" length="40" />
+                            <Field name="Bairro" padding="WHITE_SPACE_RIGHT" type="STRING" length="15" />
+                            <Field name="CEP" padding="ZERO_LEFT" type="INTEGER" length="5" />
+                            <Field name="SufixoCEP" padding="ZERO_LEFT" type="INTEGER" length="3" />
+                            <Field name="Cidade" padding="WHITE_SPACE_RIGHT" type="STRING" length="15" />
+                            <Field name="UF" padding="WHITE_SPACE_RIGHT" type="STRING" length="2" />
+                            <Field name="CNAB2" padding="WHITE_SPACE_RIGHT" type="STRING" length="8" value=" " />
+                        </GroupOfFields>
+                    </Record>					
+                </GroupOfInnerRecords>
+            </Record>
+            <!-- Final do lote -->
+            <Record name="TrailerLote">
+                <GroupOfFields>
+                    <!-- Identificador do registro 5 -->
+                    <IdType name="TipoRegistro" value="5" length="1" position="3" />
+                    <Field name="CodigoBancoCompensacao" padding="ZERO_LEFT" type="INTEGER" length="3" value="1" />
+                    <Field name="LoteServico" padding="ZERO_LEFT" type="INTEGER" length="4" />
+                    <Field name="CNAB1" padding="WHITE_SPACE_LEFT" type="STRING" length="9" value=" " />
+                    <Field name="QuantidadeRegistros" padding="ZERO_LEFT" type="INTEGER" length="6" />
+                    <Field name="CNAB2" padding="WHITE_SPACE_LEFT" type="STRING" length="217" value=" " />
+                </GroupOfFields>
+            </Record>
+            <!-- Final do arquivo -->
+            <Record name="TrailerArquivo">
+                <GroupOfFields>
+                    <!-- Identificador do registro 9 -->
+                    <IdType name="TipoRegistro" value="9" length="1" position="3" />
+                    <Field name="CodigoBancoCompensacao" length="3" value="1" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="LoteServico" length="4" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="CNAB1" length="9" value=" " type="STRING" padding="WHITE_SPACE_LEFT" />
+                    <Field name="QuantidadeLotesArquivo" length="6" padding="ZERO_LEFT" type="INTEGER"/>
+                    <Field name="QuantidadeRegistrosArquivo" length="6" type="INTEGER" padding="ZERO_LEFT" />
+                    <Field name="QuantidadeContasConciliacao" length="6" type="INTEGER" padding="ZERO_LEFT" />
+                    <Field name="CNAB2" length="205" value=" " type="STRING" padding="WHITE_SPACE_LEFT"/>
+                </GroupOfFields>
+            </Record>
+        </GroupOfRecords>
+    </FlatFile>
+</txg:Texgit>
