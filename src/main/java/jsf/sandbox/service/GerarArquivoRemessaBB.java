@@ -7,7 +7,6 @@ import java.util.List;
 import jsf.sandbox.model.Cedente;
 import jsf.sandbox.model.ContaBancaria;
 import jsf.sandbox.model.TituloCobranca;
-import jsf.sandbox.service.cnab240.ArquivoFlatFile;
 import jsf.sandbox.service.cnab240.DetalheLoteSegmentoP;
 import jsf.sandbox.service.cnab240.DetalheLoteSegmentoQ;
 import jsf.sandbox.service.cnab240.DetalheLoteSegmentoR;
@@ -18,27 +17,27 @@ import jsf.sandbox.service.cnab240.TrailerLote;
 import org.apache.commons.io.FileUtils;
 import org.jrimum.texgit.FlatFile;
 import org.jrimum.texgit.Record;
+import org.jrimum.texgit.Texgit;
 
 public class GerarArquivoRemessaBB {
 
-    private final ArquivoFlatFile templateFile;
+    private final FlatFile<Record> flatFile;
+    private static final String LEIAUTE_REMESSA_BB_240 = "cnab240/leiaute-remessa-banco-brasil.xml";
 
     public GerarArquivoRemessaBB() {
+        // 'getResource' on a Class, relative path is resolved based on the package the Class is in.
+        File template = new File(getClass().getResource(LEIAUTE_REMESSA_BB_240).getFile());        
         //carrega o template/modelo de remessa do BB
-        templateFile = new ArquivoFlatFile(getFileFromResource("leiaute-remessa-banco-brasil240.xml"));
+        flatFile = Texgit.createFlatFile(template);
     }
 
-    private File getFileFromResource(String templatePath) {
-        return new File(ArquivoFlatFile.class.getResource(templatePath).getFile());
-    }
-
-    public void gerarArquivoRemessa(List<TituloCobranca> listaParcelaReceber, Cedente empresa, ContaBancaria conta, File arquivoRemessa) throws Exception {
+    public void gerarArquivoRemessa(List<TituloCobranca> titulos, Cedente empresa, ContaBancaria conta, File arquivoRemessa) throws Exception {
         if (conta.getAgencia() == null) {
             throw new Exception("Conta não está vinculada a uma agência bancária.\nGeração do arquivo não permitida.");
         }
 
         //cria um objeto FlatFile
-        FlatFile<Record> ff = templateFile.getFlatFile();
+        FlatFile<Record> ff = getFlatFile();
 
         //header do arquivo
         HeaderArquivo headerArquivo = new HeaderArquivo(ff.createRecord("HeaderArquivo"));
@@ -94,8 +93,8 @@ public class GerarArquivoRemessaBB {
         DetalheLoteSegmentoR segmentoR;
         int sequenciaLote = 0;
         TituloCobranca parcelaReceber;
-        for (int i = 0; i < listaParcelaReceber.size(); i++) {
-            parcelaReceber = listaParcelaReceber.get(i);
+        for (int i = 0; i < titulos.size(); i++) {
+            parcelaReceber = titulos.get(i);
             segmentoP = new DetalheLoteSegmentoP(ff.createRecord("RegistroDetalheSegmentoP"));
             segmentoQ = new DetalheLoteSegmentoQ(ff.createRecord("RegistroDetalheSegmentoQ"));
             segmentoR = new DetalheLoteSegmentoR(ff.createRecord("RegistroDetalheSegmentoR"));
@@ -192,5 +191,9 @@ public class GerarArquivoRemessaBB {
 
         ff.addRecord(trailerArquivo.getRecord());
         FileUtils.writeLines(arquivoRemessa, ff.write(), System.getProperty("line.separator"));
+    }
+
+    private FlatFile<Record> getFlatFile() {
+        return flatFile;
     }
 }

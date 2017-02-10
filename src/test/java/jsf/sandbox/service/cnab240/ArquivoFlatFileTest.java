@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ArquivoFlatFileTest {
 
     private static final String REMESSA_FILE = "REM/REMESSA-01.REM";
-    private static final String TEMPLATE_FILE = "leiaute-remessa-banco-brasil240.xml";
+    private static final String TEMPLATE_FILE = "leiaute-remessa-banco-brasil.xml";
     private ArquivoFlatFile flatFile;
 
     @Before

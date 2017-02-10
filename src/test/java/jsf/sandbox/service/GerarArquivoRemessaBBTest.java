@@ -1,6 +1,5 @@
-package jsf.sandbox.service.cnab240;
+package jsf.sandbox.service;
 
-import jsf.sandbox.service.GerarArquivoRemessaBB;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -11,6 +10,7 @@ import jsf.sandbox.model.Cedente;
 import jsf.sandbox.model.ContaBancaria;
 import jsf.sandbox.model.Sacado;
 import jsf.sandbox.model.TituloCobranca;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ import org.junit.Test;
  *
  * @author gilberto.andrade
  */
-public class Remessa240BBTest {
+public class GerarArquivoRemessaBBTest {
     
     private File arquivoRemessa;
     private Cedente cedente;
@@ -53,12 +53,11 @@ public class Remessa240BBTest {
     
 
     @Test
-    public void testGeraRemessa2() throws Exception {
-        System.out.println("geraRemessa");
+    public void deveGerarArquivoRemessa() throws Exception {
         List<TituloCobranca> listaTituloCobrancas = Arrays.asList(tituloCobranca);
         Integer nrRemessa = 01;
         String codigoMovimento = "01";
         new GerarArquivoRemessaBB().gerarArquivoRemessa(listaTituloCobrancas, cedente, contaBancaria, arquivoRemessa);
-        // TODO review the generated test code and remove the default call to fail.
+        assertTrue(arquivoRemessa.length() != 0);
     }
 }
