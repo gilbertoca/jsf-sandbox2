@@ -2,6 +2,7 @@ package jsf.sandbox.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +32,8 @@ public class LerArquivoRetornoBB {
     private void carregarLinhas(File arquivo) {
         List<String> linhas;
         try {
-            linhas = FileUtils.readLines(arquivo);
+            //linhas = FileUtils.readLines(arquivo);
+            linhas = Files.readAllLines(arquivo.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Erro lendo linhas do arquivo de retorno", e);
         }

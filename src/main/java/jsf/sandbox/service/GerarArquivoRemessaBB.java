@@ -2,6 +2,7 @@ package jsf.sandbox.service;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 import jsf.sandbox.model.Cedente;
@@ -190,7 +191,8 @@ public class GerarArquivoRemessaBB {
         trailerArquivo.setQuantidadeContasConciliacao(0);
 
         ff.addRecord(trailerArquivo.getRecord());
-        FileUtils.writeLines(arquivoRemessa, ff.write(), System.getProperty("line.separator"));
+        //FileUtils.writeLines(arquivoRemessa, ff.write(), System.getProperty("line.separator"));
+        Files.write(arquivoRemessa.toPath(), ff.write());
     }
 
     private FlatFile<Record> getFlatFile() {
